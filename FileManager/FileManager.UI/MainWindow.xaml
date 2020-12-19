@@ -4,18 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileManager.UI"
+        xmlns:controls="clr-namespace:FileManager.UI.Controls"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        Title="MainWindow" Height="768" Width="1024">
-    <Window.Resources>
-        
-        
-        
-    </Window.Resources>
+        Title="MainWindow" Height="790" Width="1024">
+    
     <Border Background="Transparent">
         <Border Background="{StaticResource MenuBackgroundBrush}" CornerRadius="20" BorderThickness="0">
             <Grid ClipToBounds="True">
@@ -89,10 +86,144 @@
 
                     <Border Background="Transparent">
 
-                        <Border Background="White" CornerRadius="20"></Border>
-                        
+                        <Border Background="White" CornerRadius="20">
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="100" />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+
+                                <ToggleButton Style="{DynamicResource NavButton}"
+                                              HorizontalAlignment="Left"                                              
+                                              Margin="15 0 0 0">
+                                    <Image Source="Assets/left.png" Width="20"/>
+                                </ToggleButton>
+
+                                <StackPanel Grid.Row="1"
+                                            >
+                                    <TextBlock Text="Storage"
+                                               FontWeight="Bold"
+                                               Foreground="DarkSlateGray"
+                                               Margin="15 0 0 0"
+                                               FontSize="25"
+                                               />
+                                    <controls:MediumButton Margin="15 15 0 0" 
+                                                           Header="Dropbox" 
+                                                           SubText="16 Gb / 128 GB" 
+                                                           ImageSource="Assets/dropbox.png"
+                                                           />
+                                    <controls:MediumButton Margin="15 15 0 0" 
+                                                           Header="Google Drive" 
+                                                           SubText="83 Gb / 512 GB" 
+                                                           ImageSource="Assets/googledrive.png"
+                                                           />
+                                    <controls:MediumButton Margin="15 15 0 0" 
+                                                           Header="One Drive" 
+                                                           SubText="124 Gb / 256 GB" 
+                                                           ImageSource="Assets/onedrive.png"
+                                                           />
+
+                                    <Grid HorizontalAlignment="Left" Margin="35 0 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Assets/share.png" Width="20"/>
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="Shared With Me"
+                                                   TextAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="DarkSlateGray"
+                                                   Margin="10 0 0 0"
+                                                   />
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Left" Margin="35 15 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Assets/recent.png" Width="20"/>
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="Recent"
+                                                   TextAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="DarkSlateGray"
+                                                   Margin="10 0 0 0"
+                                                   />
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Left" Margin="35 15 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Assets/star.png" Width="20"/>
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="Starred"
+                                                   TextAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="DarkSlateGray"
+                                                   Margin="10 0 0 0"
+                                                   />
+                                    </Grid>
+                                    <Grid HorizontalAlignment="Left" Margin="35 15 0 0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Source="Assets/trash.png" Width="20"/>
+                                        <TextBlock Grid.Column="1" 
+                                                   Text="Trash"
+                                                   TextAlignment="Left"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="DarkSlateGray"
+                                                   Margin="10 0 0 0"
+                                                   />
+                                    </Grid>
+
+                                    <controls:UpgradeCard Margin="15 0 15 0" />
+
+                                    <Button Height="50" 
+                                            Margin="15" 
+                                            Style="{DynamicResource NormalButton}"
+                                            >
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="70"/>
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Border Background="Transparent" >
+                                                <Border CornerRadius="5"
+                                                        Background="#2B88C9"
+                                                        BorderThickness="0" 
+                                                        Height="30" 
+                                                        Width="30">
+                                                    <Image Source="Assets/plus.png" />
+                                                </Border>
+                                            </Border>
+                                            <TextBlock Grid.Column="1"
+                                                       Text="Create New"
+                                                       VerticalAlignment="Center"
+                                                       FontSize="15"
+                                                       FontWeight="Bold"
+                                                       />
+                                        </Grid>
+                                    </Button>
+
+                                </StackPanel>
+
+                            </Grid>
+
+                        </Border>
+
                     </Border>
-                    
+
                 </Grid>
             </Grid>
         </Border>

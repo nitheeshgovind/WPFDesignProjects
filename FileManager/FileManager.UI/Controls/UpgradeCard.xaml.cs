@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FileManager.UI
+namespace FileManager.UI.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Card.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UpgradeCard : UserControl
     {
-        public MainWindow()
+        public UpgradeCard()
         {
             InitializeComponent();
-
-            MouseLeftButtonDown += (s, e) => DragMove();
         }
     }
 }
