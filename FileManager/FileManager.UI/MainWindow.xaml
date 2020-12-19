@@ -11,8 +11,17 @@
         Background="Transparent"
         AllowsTransparency="True"
         ResizeMode="NoResize"
-        Title="MainWindow" Height="790" Width="1024">
-    
+        Title="MainWindow" Height="800" Width="1500">
+
+    <Window.Resources>
+        <Style x:Key="ProfileButton" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Width" Value="50" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="BorderThickness" Value="0" />
+        </Style>
+    </Window.Resources>
+
     <Border Background="Transparent">
         <Border Background="{StaticResource MenuBackgroundBrush}" CornerRadius="20" BorderThickness="0">
             <Grid ClipToBounds="True">
@@ -21,6 +30,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
+                <!-- Menu Buttons -->
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
@@ -82,6 +92,7 @@
                         </Button>
                     </Grid>
                 </Grid>
+
                 <Grid Grid.Column="1">
 
                     <Border Background="Transparent">
@@ -114,17 +125,17 @@
                                                Margin="15 0 0 0"
                                                FontSize="25"
                                                />
-                                    <controls:MediumButton Margin="15 15 0 0" 
+                                    <controls:MediumButton Margin="15 15 15 0" 
                                                            Header="Dropbox" 
                                                            SubText="16 Gb / 128 GB" 
                                                            ImageSource="Assets/dropbox.png"
                                                            />
-                                    <controls:MediumButton Margin="15 15 0 0" 
+                                    <controls:MediumButton Margin="15 15 15 0" 
                                                            Header="Google Drive" 
                                                            SubText="83 Gb / 512 GB" 
                                                            ImageSource="Assets/googledrive.png"
                                                            />
-                                    <controls:MediumButton Margin="15 15 0 0" 
+                                    <controls:MediumButton Margin="15 15 15 0" 
                                                            Header="One Drive" 
                                                            SubText="124 Gb / 256 GB" 
                                                            ImageSource="Assets/onedrive.png"
@@ -218,6 +229,151 @@
 
                                 </StackPanel>
 
+                                <Border Grid.Column="1" 
+                                        Grid.RowSpan="2"
+                                        Background="Transparent" 
+                                        >
+                                    <Border Background="#F3F6F9" CornerRadius="20">
+                                        <Grid>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="100"/>
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+
+                                            <Grid Grid.Row="0"
+                                                  Margin="15 0"
+                                                  >
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition MinWidth="523" Width="Auto"/>
+                                                    <ColumnDefinition />
+
+                                                </Grid.ColumnDefinitions>
+
+                                                <Border Grid.Column="0"
+                                                        Background="Transparent"
+                                                        >
+
+                                                    <Border Background="White"
+                                                            Height="50"
+                                                            CornerRadius="10"
+                                                            >
+
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="50" />
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Image Source="Assets/search.png" Width="25" Height="25" />
+
+                                                            <TextBox x:Name="searchText" 
+                                                                     Grid.Column="1" 
+                                                                     VerticalAlignment="Center"
+                                                                     BorderThickness="0"
+                                                                     />
+
+                                                            <TextBlock Grid.Column="1"
+                                                                       Margin="3 0 0 0"
+                                                                       Text="Search Something..."
+                                                                       VerticalAlignment="Center"
+                                                                       Foreground="LightGray"
+                                                                       FontWeight="Bold"
+                                                                       IsHitTestVisible="False"
+                                                                       >
+                                                                <TextBlock.Style>
+                                                                    <Style TargetType="{x:Type TextBlock}">
+                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                        <Style.Triggers>
+                                                                            <DataTrigger Binding="{Binding Text, ElementName=searchText}" Value="">
+                                                                                <Setter Property="Visibility" Value="Visible" />
+                                                                            </DataTrigger>
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </TextBlock.Style>
+                                                            </TextBlock>
+
+                                                        </Grid>
+
+                                                    </Border>
+
+                                                </Border>
+
+                                                <Grid Grid.Column="1" HorizontalAlignment="Right">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="50"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Image Margin="0 0 25 0" Grid.Column="0" Height="30" Source="Assets/bell.png" />
+                                                    <TextBlock Grid.Column="1" 
+                                                               TextAlignment="Right" 
+                                                               Margin="0 0 15 0" 
+                                                               FontWeight="Bold"
+                                                               Foreground="DarkSlateGray"
+                                                               VerticalAlignment="Center"
+                                                               Text="Hi, NG"
+                                                               />
+                                                    <Button Grid.Column="2"
+                                                            VerticalAlignment="Center"
+                                                            HorizontalAlignment="Right"
+                                                            Style="{StaticResource ProfileButton}"
+                                                            >
+                                                        <Button.Template>
+                                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                                <Grid>
+                                                                    <Ellipse>
+                                                                        <Ellipse.Fill>
+                                                                            <ImageBrush ImageSource="Assets/image1.jpg" />
+                                                                        </Ellipse.Fill>
+                                                                    </Ellipse>
+                                                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                                                </Grid>
+                                                            </ControlTemplate>
+                                                        </Button.Template>
+                                                    </Button>
+                                                </Grid>
+
+                                            </Grid>
+
+                                            <Grid Grid.Row="1">
+                                                <!--<Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="479*"/>
+                                                    <ColumnDefinition Width="700*"/>
+                                                </Grid.ColumnDefinitions>-->
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition Height="Auto"/>
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+
+                                                <UniformGrid Columns="3"
+                                                             Grid.ColumnSpan="2"
+                                                             Margin="8 15 15 8"
+                                                             >
+
+                                                    <controls:Card Header="Dropbox" 
+                                                                   SubText="16 Gb / 128 GB"
+                                                                   Percentage="56"
+                                                                   />
+
+
+                                                </UniformGrid>
+
+                                            </Grid>
+
+                                        </Grid>
+                                    </Border>
+                                </Border>
+
                             </Grid>
 
                         </Border>
@@ -225,6 +381,7 @@
                     </Border>
 
                 </Grid>
+
             </Grid>
         </Border>
     </Border>

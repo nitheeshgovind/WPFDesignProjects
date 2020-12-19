@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="FileManager.UI.Controls.ProgressRing"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FileManager.UI.Controls"
+             x:Name="progressRing"
+             xmlns:converters="clr-namespace:FileManager.UI.Converters"
+             xmlns:drawing="http://schemas.microsoft.com/expression/2010/drawing"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="50">
+
+    <UserControl.Resources>
+        <converters:ValueToAngleConverter x:Key="ValueToAngleConverter" />
+    </UserControl.Resources>
+    
+    <Grid>
+        
+        <drawing:Arc ArcThickness="{Binding ArcThickness, ElementName=progressRing}"
+                     EndAngle="360"
+                     />
+
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    >
+            <Label Content="{Binding Path=Value, ElementName=progressRing}"
+               VerticalAlignment="Center"
+               HorizontalAlignment="Center"
+               />
+            <TextBlock Text="%" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <drawing:Arc ArcThickness="{Binding ArcThickness, ElementName=progressRing}"
+                     EndAngle="{Binding Value, ElementName=progressRing, Converter={StaticResource ValueToAngleConverter}}"
+                     Stroke="{Binding ProgressBrush, ElementName=progressRing}"
+                     />
+    </Grid>
+    
+</UserControl>
