@@ -15,7 +15,7 @@
     </UserControl.Resources>
     
     <Grid>
-        
+
         <drawing:Arc ArcThickness="{Binding ArcThickness, ElementName=progressRing}"
                      EndAngle="360"
                      />
@@ -34,6 +34,8 @@
         <drawing:Arc ArcThickness="{Binding ArcThickness, ElementName=progressRing}"
                      EndAngle="{Binding Value, ElementName=progressRing, Converter={StaticResource ValueToAngleConverter}}"
                      Stroke="{Binding ProgressBrush, ElementName=progressRing}"
+                     Fill="{Binding ProgressBrush, ElementName=progressRing}"
+                     Stretch="None"
                      />
     </Grid>
     
