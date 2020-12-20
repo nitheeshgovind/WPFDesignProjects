@@ -20,6 +20,51 @@
             <Setter Property="Focusable" Value="False" />
             <Setter Property="BorderThickness" Value="0" />
         </Style>
+        <Style x:Key="RightMenuButtonStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Height" Value="35" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Border x:Name="border" CornerRadius="10" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#EFF7FD"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#EFF7FD"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F3F6F9"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="#F3F6F9"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </Window.Resources>
 
     <Border Background="Transparent">
@@ -305,7 +350,7 @@
                                                 </Border>
 
                                                 <Grid Grid.Column="1" HorizontalAlignment="Right">
-                                                    
+
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="Auto" />
@@ -345,7 +390,7 @@
                                             </Grid>
 
                                             <Grid Grid.Row="1">
-                                                
+
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
@@ -436,6 +481,56 @@
                                                 <controls:FileListView Grid.Row="4" Margin="15"/>
 
                                             </Grid>
+
+                                            <Border Grid.Column="1"
+                                                    Grid.RowSpan="3"
+                                                    Background="Transparent"
+                                                    >
+
+                                                <Border CornerRadius="20"
+                                                        Background="White"
+                                                        >
+
+                                                    <StackPanel>
+
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition />
+                                                                <ColumnDefinition Width="100" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="100" />
+                                                                <RowDefinition />
+                                                            </Grid.RowDefinitions>
+
+                                                            <TextBlock Text="Dropbox"
+                                                                       FontWeight="Bold"
+                                                                       Foreground="DarkSlateGray"
+                                                                       Margin="15 0 0 0"
+                                                                       FontSize="25"
+                                                                       VerticalAlignment="Center"
+                                                                       />
+
+                                                            <ToggleButton Style="{DynamicResource NavButton}" 
+                                                                          HorizontalAlignment="Right"
+                                                                          Grid.Column="1"
+                                                                          Margin="0 0 15 0">
+                                                                <Image Source="Assets/right.png" Width="20"/>
+                                                            </ToggleButton>
+
+                                                            <UniformGrid Grid.Row="1" Grid.ColumnSpan="3" Columns="3" Margin="15 0" HorizontalAlignment="Left">
+                                                                <RadioButton Content="Recent" Style="{DynamicResource RightMenuButtonStyle}" />
+                                                                <RadioButton Content="Activity" Style="{DynamicResource RightMenuButtonStyle}" />
+                                                                <RadioButton Content="Details" Style="{DynamicResource RightMenuButtonStyle}" />
+                                                            </UniformGrid>
+
+                                                        </Grid>
+
+                                                    </StackPanel>
+
+                                                </Border>
+
+                                            </Border>
 
                                         </Grid>
                                     </Border>
