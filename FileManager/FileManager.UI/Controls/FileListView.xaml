@@ -14,9 +14,131 @@
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="Margin" Value="15" />
             <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="DarkSlateGray" />
+            <Setter Property="Foreground" Value="LightSlateGray" />
         </Style>
-        
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="LightSlateGray" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="5 0" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F3F6F9"/>
+                                <!--<Setter Property="Foreground" Value="DarkSlateGray" />-->
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="#F3F6F9"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type Thumb}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Grid>
+                            <Rectangle HorizontalAlignment="Stretch" 
+                                       VerticalAlignment="Stretch" 
+                                       Width="auto" 
+                                       Height="auto"
+                                       Fill="Transparent"
+                                       />
+                            <Border x:Name="rect" CornerRadius="5" HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Width="auto"
+                                    Height="auto"
+                                    Background="{TemplateBinding Background}"
+                                    >
+                                
+                            </Border>
+
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Tag" Value="Horizontal">
+                                <Setter TargetName="rect" Property="Width" Value="Auto" />
+                                <Setter TargetName="rect" Property="Height" Value="7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type ScrollBar}">
+            <Setter Property="Stylus.IsFlicksEnabled" Value="True" />
+            <Setter Property="Foreground" Value="LightGray" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Width" Value="10" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ScrollBar}">
+                        <Grid x:Name="root" Width="8" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Track x:Name="PART_Track" Grid.Row="0" IsDirectionReversed="True" Focusable="False">
+                                <Track.Thumb>
+                                    <Thumb x:Name="thumb" Background="{TemplateBinding Foreground}" />
+                                </Track.Thumb>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton x:Name="pageup" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton x:Name="pagedown" Command="ScrollBar.PageUpCommand" Opacity="0" Focusable="False" />
+                                </Track.DecreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Visibility" TargetName="thumb" Value="Collapsed" />
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Horizontal">
+                                <Setter Property="LayoutTransform" TargetName="root">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="LayoutTransform" TargetName="PART_Track">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="-90" />
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Width" Value="Auto" />
+                                <Setter Property="Height" Value="12" />
+                                <Setter Property="Tag" TargetName="thumb" Value="Horizontal" />
+                                <Setter Property="Command" TargetName="pageup" Value="ScrollBar.PageLeftCommand" />
+                                <Setter Property="Command" TargetName="pagedown" Value="ScrollBar.PageRightCommand" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
     </UserControl.Resources>
     
     <Border Background="White"
@@ -31,7 +153,7 @@
             </Grid.RowDefinitions>
 
             <!-- List Headers -->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Margin="5 0">
                 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -68,7 +190,7 @@
             <ScrollViewer Grid.Row="2">
 
                 <StackPanel>
-                    <!--<Button HorizontalContentAlignment="Stretch">
+                    <Button>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -79,12 +201,163 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Orientation="Horizontal">
-                                <Image Margin="15 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
-                                <TextBlock Text="Collection 1" VerticalAlignment="Center" />
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
                             </StackPanel>
-                            
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
                         </Grid>
-                    </Button>-->
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
+                    <Button>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="140"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Orientation="Horizontal">
+                                <Image Margin="5 0 0 0" Width="50" Source="/FileManager.UI;component/Assets/folder.png" />
+                                <TextBlock Text="Collection 1" VerticalAlignment="Center" FontWeight="Bold" />
+                            </StackPanel>
+
+                            <TextBlock Grid.Column="1" Text="21 Items" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="2" Text="Jan 3, 2019" VerticalAlignment="Center" Margin="15" />
+                            <TextBlock Grid.Column="3" Text="15 Gb" VerticalAlignment="Center" Margin="15" />
+
+                        </Grid>
+                    </Button>
                 </StackPanel>
                 
             </ScrollViewer>
