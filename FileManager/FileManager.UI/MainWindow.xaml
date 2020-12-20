@@ -238,7 +238,7 @@
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition />
-                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="350" />
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="100"/>
@@ -305,6 +305,7 @@
                                                 </Border>
 
                                                 <Grid Grid.Column="1" HorizontalAlignment="Right">
+                                                    
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="Auto"/>
                                                         <ColumnDefinition Width="Auto" />
@@ -318,7 +319,8 @@
                                                                FontWeight="Bold"
                                                                Foreground="DarkSlateGray"
                                                                VerticalAlignment="Center"
-                                                               Text="Hi, NG"
+                                                               MaxWidth="134"
+                                                               Text="Hi, Nitheesh"
                                                                />
                                                     <Button Grid.Column="2"
                                                             VerticalAlignment="Center"
@@ -343,10 +345,7 @@
                                             </Grid>
 
                                             <Grid Grid.Row="1">
-                                                <!--<Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="479*"/>
-                                                    <ColumnDefinition Width="700*"/>
-                                                </Grid.ColumnDefinitions>-->
+                                                
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition Height="Auto"/>
                                                     <RowDefinition Height="Auto"/>
@@ -355,18 +354,86 @@
                                                     <RowDefinition />
                                                 </Grid.RowDefinitions>
 
-                                                <UniformGrid Columns="3"
-                                                             Grid.ColumnSpan="2"
-                                                             Margin="8 15 15 8"
+                                                <Viewbox>
+                                                    <UniformGrid Columns="3"
+                                                                 Grid.ColumnSpan="2"
+                                                                 Margin="15"
+                                                                 >
+
+                                                        <controls:Card Header="Dropbox" 
+                                                                       SubText="16 Gb / 128 GB"
+                                                                       Percentage="56" Icon="Assets/dropbox.png"
+                                                                       />
+
+                                                        <controls:Card Header="Google Drive" 
+                                                                       Margin="15 0"
+                                                                       SubText="83 Gb / 512 GB"
+                                                                       Percentage="56" Icon="Assets/googledrive.png"
+                                                                       />
+
+                                                        <controls:Card Header="One Drive" 
+                                                                       SubText="124 Gb / 256 GB"
+                                                                       Percentage="56" Icon="Assets/onedrive.png"
+                                                                       />
+
+
+                                                    </UniformGrid>
+                                                </Viewbox>
+
+                                                <TextBlock Grid.Row="1"
+                                                           Text="Quick Access"
+                                                           Foreground="DarkSlateGray"
+                                                           FontSize="25"
+                                                           Margin="15 15 0 0"
+                                                           FontWeight="Bold"
+                                                           />
+
+                                                <UniformGrid Columns="8"
+                                                             Grid.Row="2"
+                                                             Margin="0 30"
                                                              >
 
-                                                    <controls:Card Header="Dropbox" 
-                                                                   SubText="16 Gb / 128 GB"
-                                                                   Percentage="56"
-                                                                   />
+                                                    <controls:ImageButton Text="Images" ImageSource="Assets/image.png"/>
 
+                                                    <controls:ImageButton Text="Video" ImageSource="Assets/video.png"/>
+
+                                                    <controls:ImageButton Text="Music" ImageSource="Assets/music.png"/>
+
+                                                    <controls:ImageButton Text="Apps" ImageSource="Assets/apps.png"/>
+
+                                                    <controls:ImageButton Text="Zip Files" ImageSource="Assets/zip.png"/>
+
+                                                    <controls:ImageButton Text="Documents" ImageSource="Assets/document.png"/>
+
+                                                    <controls:ImageButton Text="Downloads" ImageSource="Assets/downloadsfolder.png"/>
+
+                                                    <controls:ImageButton Text="Add" ImageSource="Assets/plus.png"/>
 
                                                 </UniformGrid>
+
+                                                <Grid Grid.Row="3" Margin="15">
+
+                                                    <TextBlock Grid.Row="4"
+                                                               Text="My Files"
+                                                               Foreground="DarkSlateGray"
+                                                               FontSize="25"
+                                                               HorizontalAlignment="Left"
+                                                               VerticalAlignment="Center"
+                                                               FontWeight="Bold"
+                                                               />
+
+                                                    <TextBlock Grid.Row="5"
+                                                               Text="See All"
+                                                               Foreground="#FF37A0EA"
+                                                               HorizontalAlignment="Right"
+                                                               VerticalAlignment="Center"
+                                                               FontSize="12"
+                                                               />
+
+
+                                                </Grid>
+
+                                                <controls:FileListView Grid.Row="4" Margin="15"/>
 
                                             </Grid>
 

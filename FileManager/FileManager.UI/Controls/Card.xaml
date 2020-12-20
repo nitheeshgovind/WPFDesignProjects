@@ -64,6 +64,8 @@
             <Setter Property="Foreground" Value="DarkSlateGray" />
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Text" Value="{Binding Header, ElementName=userControl, FallbackValue=Header}" />
+            <Setter Property="Margin" Value="10 10 0 0" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" Value="True">
                     <Setter Property="Foreground" Value="White" />
@@ -78,8 +80,32 @@
             <Setter Property="Foreground" Value="LightSlateGray"/>
             <Setter Property="HorizontalAlignment" Value="Left" />
             <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Text" Value="{Binding SubText, ElementName=userControl, FallbackValue=Header}" />
+            <Setter Property="Margin" Value="10 10 0 0" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" Value="True">
+                    <Setter Property="Foreground" Value="White" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="{x:Type local:ProgressRing}">
+            <Setter Property="Margin" Value="0 0 0 22" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Bottom" />
+            <Setter Property="Height" Value="50" />
+            <Setter Property="Grid.RowSpan" Value="3" />
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="ArcThickness" Value="4" />
+            <Setter Property="Value" Value="{Binding Percentage, ElementName=userControl, FallbackValue=50}" />
+            <Setter Property="ProgressBrush" Value="#58B0ED" />
+            <Setter Property="ProgressTrackBrush" Value="LightGray" />
+            <Setter Property="Foreground" Value="DarkSlateGray" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Button}}}" Value="True">
+                    <Setter Property="ProgressBrush" Value="White" />
+                    <Setter Property="ProgressTrackBrush" Value="#2B88C9" />
                     <Setter Property="Foreground" Value="White" />
                 </DataTrigger>
             </Style.Triggers>
@@ -89,6 +115,7 @@
     <Grid Background="Transparent">
         <Button Style="{DynamicResource CardButton}">
             <Grid>
+                
                 <Grid.ColumnDefinitions >
                     <ColumnDefinition />
                     <ColumnDefinition Width="100"/>
@@ -97,35 +124,24 @@
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                
                 <Border Grid.Column="0"
                         Grid.Row="0"
                         Style="{StaticResource CardButtonIconBackground}"
                         >
                     <Image x:Name="icon" Width="20" Stretch="Uniform" Source="{Binding Icon, ElementName=userControl}" />
                 </Border>
+                
                 <StackPanel Grid.Column="0"
                             Grid.Row="1"
                             >
-                    <TextBlock Text="{Binding Header, ElementName=userControl, FallbackValue=Header}"
-                               Style="{DynamicResource HeaderStyle}"
-                               Margin="10 10 0 0"
-                               />
-                    <TextBlock Text="{Binding SubText, ElementName=userControl, FallbackValue=Subtext}"
-                               Style="{DynamicResource SubTextStyle}"
-                               Margin="10 10 0 0"
+                    <TextBlock Style="{DynamicResource HeaderStyle}"/>
+                    
+                    <TextBlock Style="{DynamicResource SubTextStyle}"
                                />
                 </StackPanel>
 
-                <local:ProgressRing Grid.Column="1"
-                                    Grid.RowSpan="2"
-                                    Margin="0 0 0 22"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Bottom"
-                                    Height="50"
-                                    Width="50"
-                                    ProgressBrush="Blue"
-                                    Value="{Binding Percentage, ElementName=userControl, FallbackValue=50}"
-                                    />
+                <local:ProgressRing />
 
             </Grid>
         </Button>

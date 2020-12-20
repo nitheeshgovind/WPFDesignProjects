@@ -18,16 +18,17 @@
 
         <drawing:Arc ArcThickness="{Binding ArcThickness, ElementName=progressRing}"
                      EndAngle="360"
+                     Fill="{Binding ProgressTrackBrush, ElementName=progressRing}"
                      />
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     >
-            <Label Content="{Binding Path=Value, ElementName=progressRing}"
-               VerticalAlignment="Center"
-               HorizontalAlignment="Center"
-               />
+            <TextBlock Text="{Binding Path=Value, ElementName=progressRing}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       />
             <TextBlock Text="%" VerticalAlignment="Center" />
         </StackPanel>
 

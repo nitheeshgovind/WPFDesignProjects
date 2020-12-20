@@ -36,8 +36,6 @@ namespace FileManager.UI.Controls
             DependencyProperty.Register("ArcThickness", typeof(double), typeof(ProgressRing), new PropertyMetadata(2.0));
 
 
-
-
         public double Value
         {
             get { return (double)GetValue(ValueProperty); }
@@ -49,6 +47,15 @@ namespace FileManager.UI.Controls
             DependencyProperty.Register("Value", typeof(double), typeof(ProgressRing), new PropertyMetadata(0.0));
 
 
+        public Brush ProgressTrackBrush
+        {
+            get { return (Brush)GetValue(ProgressTrackBrushProperty); }
+            set { SetValue(ProgressTrackBrushProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ProgressTrackBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ProgressTrackBrushProperty =
+            DependencyProperty.Register("ProgressTrackBrush", typeof(Brush), typeof(ProgressRing));
 
 
         public Brush ProgressBrush
