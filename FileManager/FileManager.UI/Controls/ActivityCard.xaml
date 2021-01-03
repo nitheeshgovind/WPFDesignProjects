@@ -4,12 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FileManager.UI.Controls"
+             xmlns:design="clr-namespace:FileManager.UI.Controls.Design"
+             xmlns:converter="clr-namespace:FileManager.UI.Converters"
              mc:Ignorable="d" 
              x:Name="activityCard"
-             MinHeight="200"
+             Height="Auto"
+             d:DataContext="{x:Static design:ActivityDesignModel.Instance}"
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
+
+        <converter:StringToImageConverter x:Key="StringToImageConverter" />
+
         <Style x:Key="OuterRectangle" TargetType="{x:Type Rectangle}">
             <Setter Property="Fill" Value="LightGray" />
             <Setter Property="Margin" Value="15 0" />
@@ -27,7 +33,7 @@
             <Setter Property="RadiusX" Value="8" />
             <Setter Property="RadiusY" Value="8" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}" Value="True">
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}, AncestorLevel=1}}" Value="True">
                     <Setter Property="Fill" Value="White" />
                     <Setter Property="Height" Value="15" />
                     <Setter Property="Width" Value="15" />
@@ -43,14 +49,82 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="Foreground" Value="SlateGray" />
             <Style.Triggers>
-                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}" Value="True">
+                <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid},AncestorLevel=1}}" Value="True">
                     <Setter Property="Foreground" Value="#58B0ED" />
                     <Setter Property="FontWeight" Value="Bold" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="LinePath" TargetType="{x:Type Path}">
+            <Setter Property="Data" Value="M 0,0 L0,140" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Fill" Value="LightGray" />
+            <Setter Property="Stroke" Value="LightGray" />
+        </Style>
+        <Style x:Key="ImageRectange" TargetType="{x:Type Rectangle}">
+            <Setter Property="RadiusX" Value="8" />
+            <Setter Property="RadiusY" Value="8" />
+            <Setter Property="Height" Value="80" />
+            <Setter Property="Width" Value="80" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="SmallImageRectange" TargetType="{x:Type Rectangle}">
+            <Setter Property="RadiusX" Value="2" />
+            <Setter Property="RadiusY" Value="2" />
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="25" />
+        </Style>
+        <Style x:Key="PlayButton" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="25" />
+            <Setter Property="Width" Value="25" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Visibility" Value="Hidden" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ButtonBase}">
+                        <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <ContentPresenter.Content>
+                                    <Image Source="/Assets/Play.png" Width="15" Height="15" />
+                                </ContentPresenter.Content>
+                            </ContentPresenter>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#EFF7FD"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#EFF7FD"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#EFF7FD"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#EFF7FD"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#EFF7FD"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsVideo, ElementName=activityCard}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
     </UserControl.Resources>
-    
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -64,9 +138,77 @@
         <Rectangle Grid.Column="0" Grid.Row="0" Style="{StaticResource OuterRectangle}" />
         <Rectangle Grid.Column="0" Grid.Row="0" Style="{StaticResource InnerRectangle}" />
 
-        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource TimeHeaderStyle}" Text="1 Minute Ago" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Style="{StaticResource TimeHeaderStyle}" Text="{Binding ActivityTime}" />
 
-        <Rectangle Grid.Row="1" Grid.Column="0" Width="1" Fill="LightGray" />
+        <Path Grid.Row="1" Grid.Column="0" Style="{StaticResource LinePath}" />
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <ItemsControl ItemsSource="{Binding DisplayItems}">
+                <!--<ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" HorizontalAlignment="Left" Margin="-5 15 15 15" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>-->
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="10 0">
+                            <Rectangle Style="{StaticResource ImageRectange}">
+                                <Rectangle.Fill>
+                                    <ImageBrush ImageSource="{Binding Image, Converter={StaticResource StringToImageConverter}}"  />
+                                </Rectangle.Fill>
+                            </Rectangle>
+                            <Button Style="{StaticResource PlayButton}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <UniformGrid Columns="3" HorizontalAlignment="Left" Margin="-5 15 15 15">
+                <Grid Margin="10 0">
+                    <Rectangle Style="{StaticResource ImageRectange}">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding Image1, ElementName=activityCard}"  />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Button Style="{StaticResource PlayButton}"/>
+                </Grid>
+                <Grid>
+                    <Rectangle Style="{StaticResource ImageRectange}">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding Image2, ElementName=activityCard}"  />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Button Style="{StaticResource PlayButton}"/>
+                </Grid>
+                <Grid>
+                    <Rectangle Style="{StaticResource ImageRectange}">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="{Binding Image3, ElementName=activityCard}"  />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Button Style="{StaticResource PlayButton}"/>
+                </Grid>
+            </UniformGrid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Rectangle Style="{StaticResource SmallImageRectange}">
+                    <Rectangle.Fill>
+                        <ImageBrush ImageSource="{Binding TypeImage, ElementName=activityCard}"  />
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Column="1" Style="{StaticResource TimeHeaderStyle}" Foreground="SlateGray">
+                    <TextBlock.Inlines>
+                        <Run Text="{Binding Type}" />
+                        <Run Text="from" />
+                        <Run Text="{Binding Source}" FontWeight="Bold"/>
+                        <Run Text="{Binding Count, Mode=OneTime}" FontWeight="Bold"/>
+                        <Run Text="Items" />
+                    </TextBlock.Inlines>
+                </TextBlock>
+            </Grid>
+        </StackPanel>
 
     </Grid>
 </UserControl>

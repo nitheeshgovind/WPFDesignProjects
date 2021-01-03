@@ -59,6 +59,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\Design\ActivityDesignModel.cs" />
+    <Compile Include="Converters\StringToImageConverter.cs" />
+    <Compile Include="Models\ActivityItem.cs" />
+    <Compile Include="Models\ActivityModel.cs" />
+    <Compile Include="Models\ActivityType.cs" />
+    <Compile Include="ViewModels\ActivityViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NotifyPropertyChanged.cs" />
+    <Compile Include="ViewModels\RelayCommand.cs" />
     <Page Include="Controls\ActivityCard.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -219,5 +228,6 @@
   <ItemGroup>
     <Content Include="Lib\Microsoft.Expression.Drawing.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

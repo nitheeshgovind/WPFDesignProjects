@@ -24,5 +24,23 @@ namespace FileManager.UI.Controls
         {
             InitializeComponent();
         }
+
+        public string TimeText { get; set; }
+
+        public bool IsVideo { get; set; }
+
+        public ImageSource Image1 { get; set; }
+
+        public ImageSource Image2 { get; set; }
+
+        public ImageSource Image3 { get; set; }
+
+        public ImageSource TypeImage { get; set; }
+
+        public string TypeName { get; set; }
+
+        public string SourceName { get; set; }
+
+        public int ItemCount { get; set; }
     }
 }
